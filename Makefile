@@ -10,6 +10,9 @@ APP_OBJ = $(APP_SRC:.c=.o)
 STATIC_LIB = libbf.a
 DYNAMIC_LIB = libbf.so
 
+TEST_TARGET = test_runner
+TEST_SRC = tests/test_gerenciamento_de_memoria_bf.c
+
 $(STATIC_LIB): $(LIB_OBJ)
 	ar rcs $@ $^
 
@@ -24,10 +27,14 @@ $(TARGET): $(APP_OBJ) $(STATIC_LIB)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean run
+.PHONY: all clean run test
 
 clean:
-	rm -f $(LIB_OBJ) $(APP_OBJ) $(STATIC_LIB) $(DYNAMIC_LIB) $(TARGET)
+	rm -f $(LIB_OBJ) $(APP_OBJ) $(STATIC_LIB) $(DYNAMIC_LIB) $(TARGET) $(TEST_TARGET)
 
 run: $(TARGET)
 	./$(TARGET)
+
+test: $(STATIC_LIB)
+	$(CC) $(CFLAGS) $(TEST_SRC) $(STATIC_LIB) -o $(TEST_TARGET)
+	./$(TEST_TARGET) --test

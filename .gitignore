@@ -6,3 +6,4 @@ logs/
 *.a
 *.o
 calculadora_bf
+test_runner
