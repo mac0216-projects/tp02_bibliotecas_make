@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -Werror -Iinclude
 TARGET = calculadora_bf
 
-LIB_SRCS = src/gerenciamento_de_memoria_bf.c
+LIB_SRCS = src/gerenciamento_de_memoria_bf.c src/entrada_e_saida.c
 APP_SRC = app/main.c
 LIB_OBJ = $(LIB_SRCS:.c=.o)
 APP_OBJ = $(APP_SRC:.c=.o)
@@ -11,7 +11,7 @@ STATIC_LIB = libbf.a
 DYNAMIC_LIB = libbf.so
 
 TEST_TARGET = test_runner
-TEST_SRC = tests/test_gerenciamento_de_memoria_bf.c
+TEST_SRC = tests/test_gerenciamento_de_memoria_bf.c tests/test_entrada_e_saida.c
 
 $(STATIC_LIB): $(LIB_OBJ)
 	ar rcs $@ $^

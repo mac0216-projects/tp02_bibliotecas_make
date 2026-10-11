@@ -10,7 +10,7 @@ bool inicializar_bf(BigFloat *bf) {
   bf->mantissa = malloc(bf->capacidade * sizeof(limb_t));
 
   if (bf->mantissa == NULL) {
-        return false;
+        return false; // Faltou RAM
     }
 
   return true; 
