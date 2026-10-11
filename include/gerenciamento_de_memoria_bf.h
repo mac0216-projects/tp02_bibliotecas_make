@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef uint32_t limb_t;
 
@@ -18,17 +19,16 @@ typedef struct {
     size_t capacidade;   /**< Quantidade total de blocos alocados na memória. */
     limb_t *mantissa;    /**< Ponteiro para o array dinâmico que guarda os dígitos. */
   
-} BigFLoat;
+} BigFloat;
 
 /**
- * @brief Inicializa e aloca memória para uma nova estrutura BigFLoat.
+ * @brief Inicializa e aloca memória para uma nova estrutura BigFloat.
+ * @param bf Ponteiro para a estrutura a ser inicializada.
  * @pre Nenhuma.
- * @post A estrutura BigFLoat é retornada com seus valores zerados/padrão 
- * @warning Se houver falta de memória e o malloc falhar, a função exibirá 
- * uma mensagem de erro fatal e encerrará a execução do programa com exit(1).
- * @return BigFLoat Uma nova instância da estrutura BigFLoat pronta para uso.
+ * @post A estrutura BigFloat é retornada com seus valores zerados/padrão 
+ * @return bool Retorna true se alocou com sucesso, false se faltou memória.
  */
-BigFLoat inicializar_bf();
+bool inicializar_bf(BigFloat *bf);
 
 /**
  * @brief Libera a memória alocada para a mantissa de um BigFloat.
@@ -36,6 +36,6 @@ BigFLoat inicializar_bf();
  * @pre O ponteiro "bf" deve ser válido (diferente de NULL) e a estrutura deve ter sido previamente inicializada.
  * @post A memória de "bf->mantissa" é devolvida ao sistema, o ponteiro passa a apontar para NULL, e os valores de "capacidade" e "tamanho" são zerados.
  */
-void liberar_bf(BigFLoat *bf);
+void liberar_bf(BigFloat *bf);
 
 #endif
