@@ -1,13 +1,13 @@
 #include "gerenciamento_de_memoria_bf.h"
 
 int main() {
-  BigFLoat meu_numero_inicial = inicializar_bf();
+  BigFLoat n1 = inicializar_bf();
 
-  printf("Capacidade: %zu\n", meu_numero_inicial.capacidade);
-  printf("Endereço da mantissa: %p\n", meu_numero_inicial.mantissa);
-  printf("Mantissa: %u\n", meu_numero_inicial.mantissa[0]);
+  printf("Capacidade: %zu\n", n1.capacidade);
+  printf("Endereço da mantissa: %p\n", n1.mantissa);
+  printf("Mantissa: %u\n", n1.mantissa[0]);
 
-
+  liberar_bf(&n1);
 
   return 0;
 }

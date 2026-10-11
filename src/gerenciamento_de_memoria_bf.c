@@ -16,3 +16,14 @@ BigFLoat inicializar_bf() {
 
   return bf; 
 }
+
+void liberar_bf(BigFLoat *bf) {
+  if (bf == NULL) {
+    return;
+  }
+
+  free(bf->mantissa);
+  bf->mantissa = NULL;
+  bf->capacidade = 0;
+  bf->tamanho = 0;
+}

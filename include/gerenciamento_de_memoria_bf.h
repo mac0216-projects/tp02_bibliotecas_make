@@ -30,5 +30,12 @@ typedef struct {
  */
 BigFLoat inicializar_bf();
 
+/**
+ * @brief Libera a memória alocada para a mantissa de um BigFloat.
+ * @param bf Ponteiro para a estrutura BigFLoat que será limpa.
+ * @pre O ponteiro "bf" deve ser válido (diferente de NULL) e a estrutura deve ter sido previamente inicializada.
+ * @post A memória de "bf->mantissa" é devolvida ao sistema, o ponteiro passa a apontar para NULL, e os valores de "capacidade" e "tamanho" são zerados.
+ */
+void liberar_bf(BigFLoat *bf);
 
 #endif
