@@ -7,3 +7,4 @@ logs/
 *.o
 calculadora_bf
 test_runner
+output

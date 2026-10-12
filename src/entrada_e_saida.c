@@ -2,6 +2,25 @@
 #include <string.h>
 
 bool string_para_bf(BigFloat *destino, const char *string) {
+  if (string == NULL || strlen(string) == 0) return false;
+
+  bool achou_ponto = false;
+    for (size_t i = 0; i < strlen(string); i++) {
+        char c = string[i];
+
+        if (i == 0 && c == '-') continue;
+
+        if (c == '.') {
+            if (achou_ponto) return false;
+            achou_ponto = true;
+            continue;
+        }
+
+        if (c < '0' || c > '9') {
+            return false;
+        }
+    }
+
   int sinal = 1;
   long expoente = 0;
   size_t tamanho = 0;

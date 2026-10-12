@@ -26,12 +26,8 @@ void teste_liberar_bf() {
   liberar_bf(NULL);
 }
 
-int main() {
-  printf("Iniciando testes de memoria...\n");
+void test_modulo_gerenciamneto_de_memoria() {
 
   teste_inicializar_bf();
   teste_liberar_bf();
-  
-  printf("Todos os testes de memoria passaram com sucesso!\n");
-  return 0;
 }

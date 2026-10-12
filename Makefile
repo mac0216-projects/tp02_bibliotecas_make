@@ -11,7 +11,7 @@ STATIC_LIB = libbf.a
 DYNAMIC_LIB = libbf.so
 
 TEST_TARGET = test_runner
-TEST_SRC = tests/test_gerenciamento_de_memoria_bf.c tests/test_entrada_e_saida.c
+TEST_SRCS = tests/*.c
 
 $(STATIC_LIB): $(LIB_OBJ)
 	ar rcs $@ $^
@@ -36,5 +36,5 @@ run: $(TARGET)
 	./$(TARGET)
 
 test: $(STATIC_LIB)
-	$(CC) $(CFLAGS) $(TEST_SRC) $(STATIC_LIB) -o $(TEST_TARGET)
+	$(CC) $(CFLAGS) $(TEST_SRCS) $(STATIC_LIB) -o $(TEST_TARGET)
 	./$(TEST_TARGET) --test
