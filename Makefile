@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -Werror -Iinclude
 TARGET = calculadora_bf
 
-LIB_SRCS = src/gerenciamento_de_memoria_bf.c src/entrada_e_saida.c src/comparacao_bf.c
+LIB_SRCS = src/gerenciamento_de_memoria_bf.c src/entrada_e_saida.c src/comparacao_bf.c src/bf_mensagem.c
 APP_SRC = app/main.c
 LIB_OBJ = $(LIB_SRCS:.c=.o)
 APP_OBJ = $(APP_SRC:.c=.o)
