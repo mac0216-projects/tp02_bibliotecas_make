@@ -26,7 +26,21 @@
 
     /*------------------------------------------------------------------------*/
 
+    /*!
+        @brief Busca a mensagem correspondente ao código de erro fornecido.
+        @param BF_MACRO_MENSAGEM O código de erro para o qual a mensagem deve ser buscada.
+        @return Uma string contendo a mensagem correspondente ao código de erro fornecido.
+    */
     const char *bf_buscar_mensagem_macro(BfMensagemEnum BF_MACRO_MENSAGEM);
+
+    /*------------------------------------------------------------------------*/
+
+    /*!
+        @brief Exibe uma mensagem de depuração no console.
+        @param BF_MACRO_MENSAGEM O código de erro para o qual a mensagem deve ser exibida.
+        @param BF_TIPO_MENSAGEM O tipo da mensagem (OK, ERROR, WARNING, INFO).
+        @param mensagemUsuario A mensagem personalizada fornecida pelo usuário.
+    */
     void bf_mensagem_debug(BfMensagemEnum BF_MACRO_MENSAGEM, BfMensagemTipoEnum BF_TIPO_MENSAGEM, const char *mensagemUsuario);
 
-#endif
+#endif 
