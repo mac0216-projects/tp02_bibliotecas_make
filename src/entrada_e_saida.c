@@ -10,8 +10,10 @@ bool string_para_bf(BigFloat *destino, const char *string) {
 
         if (i == 0 && c == '-') continue;
 
-        if (c == '.') {
-            if (achou_ponto) return false;
+        if (c == '.') { 
+            if (achou_ponto) return false; // se achou um segunto ponto, numero invalido
+            if ((i == strlen(string) - 1) && c == '.') return false; // ex: 83197371. numero invalido
+
             achou_ponto = true;
             continue;
         }
