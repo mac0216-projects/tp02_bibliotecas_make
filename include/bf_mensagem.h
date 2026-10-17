@@ -2,7 +2,7 @@
 
     #define BF_MENSAGEM_H
     #define BF_MACRO_LISTA_MENSAGEM(X) \
-        X(BF_OK,                "Sucesso") \
+        X(BF_SUCESSO,                "Sucesso") \
         X(BF_ERROR_NULL,        "Ponteiro nulo") \
         X(BF_ERROR_ALLOC,       "Falha de alocação de memória") \
         X(BF_ERROR_INVALID_ARG, "Argumento inválido") \
