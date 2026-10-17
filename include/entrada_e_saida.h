@@ -19,4 +19,19 @@
  */
 bool string_para_bf(BigFloat *destino, const char *string);
 
+/**
+ * @brief Imprime o valor numérico de um BigFloat em uma stream de saída.
+ * 
+ * Lida automaticamente com o sinal, o posicionamento correto do ponto decimal 
+ * (baseado no expoente) e o preenchimento com zeros para números fracionários.
+ * 
+ * @param stream Ponteiro para a stream de saída (ex: "stdout" para imprimir no terminal, ou um arquivo aberto).
+ * @param bf Ponteiro constante para a estrutura BigFloat que será impressa.
+ * @pre Os ponteiros "stream" e "bf" não devem ser nulos, e "bf" deve estar inicializado.
+ * @post O valor numérico formatado é escrito na "stream" fornecida, seguido de uma quebra de linha. O estado de "bf" permanece inalterado.
+ * @warning Se "bf" ou "stream" forem nulos, a função não quebra o programa; ela exibe uma mensagem de erro no console e retorna precocemente.
+ */
+void imprimir_bf(FILE *stream, const BigFloat *bf);
+
+
 #endif

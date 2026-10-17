@@ -14,6 +14,14 @@ int main() {
     printf("String invalida!\n");
     return 1;
   }
+
+  //FILE *saida = fopen("resultado.txt", "w"); //"w" = write
+  FILE *saida = stdout;
+
+  if (saida != NULL) {
+        imprimir_bf(saida, &meu_numero);
+        fclose(saida);
+    }
   
   liberar_bf(&meu_numero);
 

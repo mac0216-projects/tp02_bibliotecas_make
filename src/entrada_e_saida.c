@@ -97,3 +97,73 @@ bool string_para_bf(BigFloat *destino, const char *string) {
   
   return true;
 }
+
+void imprimir_bf(FILE *stream, const BigFloat *bf) {
+    // validação e caso zero
+    if (bf == NULL || stream == NULL) {
+        printf("Paramentros varios.\n");
+        return;
+    }
+
+    if (bf->tamanho == 0) {
+        fprintf(stream, "0\n");
+        return;
+    }
+    // imprime o sinal
+    if (bf->sinal == -1) {
+        fprintf(stream, "-");
+    }
+
+    // tamanho exato apenas do primeiro bloco (o mais alto) ex: número o 21.234.567.890
+    // terá mantissa[0] = 234567890 e mantissa[1] = 21, logo a mantissa[1](topo) tera 1 digito
+    char buf_topo[12]; 
+    int digitos_topo = sprintf(buf_topo, "%u", bf->mantissa[bf->tamanho - 1]);
+    
+    // total de dígitos do número inteiro = tamanho do bloco do topo + (outros blocos * 9)
+    long total_digitos = digitos_topo + ((long)bf->tamanho - 1) * 9;
+
+    // número puramente fracionário. ex: 0.00125, mantissa[0] = 125 (total de digitos = 3), 
+    // mas o expoente bf->expoente = 5, logo 5 - 3 = 2, como 5>=3, imprime dois zeros depois do ponto 0.00
+    if (bf->expoente >= total_digitos) {
+        fprintf(stream, "0.");
+        for (long i = 0; i < bf->expoente - total_digitos; i++) {
+            fprintf(stream, "0");
+        }
+        
+        // imprime os blocos restantes
+        fprintf(stream, "%s", buf_topo);
+        for (long i = bf->tamanho - 2; i >= 0; i--) {
+            fprintf(stream, "%09u", bf->mantissa[i]);
+        }
+    } 
+    // numero normal/não fracionario (o ponto cai no meio ou não existe)
+    else {
+        long posicao_do_ponto = total_digitos - bf->expoente;
+        long posicao_atual = 0;
+
+        // imprime o bloco do topo caractere por caractere
+        for (int j = 0; buf_topo[j] != '\0'; j++) {
+            if (posicao_atual == posicao_do_ponto && bf->expoente > 0) {
+                fprintf(stream, ".");
+            }
+            fprintf(stream, "%c", buf_topo[j]);
+            posicao_atual++;
+        }
+
+        // Imprime o resto dos blocos caractere por caractere
+        for (long i = bf->tamanho - 2; i >= 0; i--) {
+            char buf_bloco[10];
+            sprintf(buf_bloco, "%09u", bf->mantissa[i]); // formata preenchendo com zeros
+            
+            for (int j = 0; buf_bloco[j] != '\0'; j++) {
+                if (posicao_atual == posicao_do_ponto && bf->expoente > 0) {
+                    fprintf(stream, ".");
+                }
+                fprintf(stream, "%c", buf_bloco[j]);
+                posicao_atual++;
+            }
+        }
+    }
+    
+    fprintf(stream, "\n");
+}
