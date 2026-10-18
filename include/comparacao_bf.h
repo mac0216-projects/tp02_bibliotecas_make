@@ -1,26 +1,32 @@
 #ifndef _comparacao_bf_h
 #define _comparacao_bf_h
 #include "gerenciamento_de_memoria_bf.h"
+/** Valor devolvido por comparar_bf() e comparar_modulo_bf() quando um argumento é inválido. */
+#define BF_CMP_ERRO 2
 
 /**
  * @brief Compara dois BigFloat levando em conta o sinal.
- * @param a Ponteiro para o primeiro número.
- * @param b Ponteiro para o segundo número.
- * @pre "a" e "b" devem ser válidos (não nulos) e já inicializados.
+ * @param bf1 Ponteiro para o primeiro número.
+ * @param bf2 Ponteiro para o segundo número.
+ * @pre "bf1" e "bf2" devem ser válidos (não nulos) e já inicializados.
  * @post Nenhum dos números é modificado.
- * @return int -1 se a < b, 0 se a == b, 1 se a > b.
+ * @return int -1 se bf1 < bf2, 0 se bf1 == bf2, 1 se bf1 > bf2,
+ *         ou BF_CMP_ERRO se algum argumento for inválido.
+ *         Quem chama deve comparar com BF_CMP_ERRO antes de interpretar o resultado.
  */
-int comparar_bf(const BigFloat *a, const BigFloat *b);
+int comparar_bf(const BigFloat *bf1, const BigFloat *bf2);
 
 /**
- * @brief Compara dois BigFloat ignorando o sinal (compara |a| com |b|).
- * @param a Ponteiro para o primeiro número.
- * @param b Ponteiro para o segundo número.
- * @pre "a" e "b" devem ser válidos (não nulos) e já inicializados.
+ * @brief Compara dois BigFloat ignorando o sinal (compara |bf1| com |bf2|).
+ * @param bf1 Ponteiro para o primeiro número.
+ * @param bf2 Ponteiro para o segundo número.
+ * @pre "bf1" e "bf2" devem ser válidos (não nulos) e já inicializados.
  * @post Nenhum dos números é modificado.
- * @return int -1 se |a| < |b|, 0 se |a| == |b|, 1 se |a| > |b|.
+ * @return int -1 se |bf1| < |bf2|, 0 se |bf1| == |bf2|, 1 se |bf1| > |bf2|,
+ *         ou BF_CMP_ERRO se algum argumento for inválido.
+ *         Quem chama deve comparar com BF_CMP_ERRO antes de interpretar o resultado.
  */
-int comparar_modulo_bf(const BigFloat *a, const BigFloat *b);
+int comparar_modulo_bf(const BigFloat *bf1, const BigFloat *bf2);
 
 /**
  * @brief Verifica se o número vale zero.
@@ -28,6 +34,7 @@ int comparar_modulo_bf(const BigFloat *a, const BigFloat *b);
  * @pre "bf" deve ser válido (não nulo) e já inicializado.
  * @post O número não é modificado.
  * @return bool true se o valor for zero (inclusive "-0"), false caso contrário.
+ *         Retorna false se "bf" for inválido.
  */
 bool bf_e_zero(const BigFloat *bf);
 
@@ -38,6 +45,7 @@ bool bf_e_zero(const BigFloat *bf);
  * @post O número não é modificado.
  * @return bool true se o valor for menor que zero, false caso contrário
  *         (zero não é negativo, mesmo com sinal -1).
+ *         Retorna false se "bf" for inválido.
  */
 bool bf_e_negativo(const BigFloat *bf);
 
