@@ -49,4 +49,15 @@ bool bf_e_zero(const BigFloat *bf);
  */
 bool bf_e_negativo(const BigFloat *bf);
 
+
+/*!
+    @brief Verifica se o número é de fato um BigFloat válido.
+    @param bf Ponteiro para um número BigFloat.
+    @pre "bf" deve ser válido (não nulo) e já inicializado.
+    @post O número não é modificado.
+    @return TRUE se o valor for válido, FALSE caso contrário (zero não é negativo,
+        mesmo com sinal -1). Retorna FALSE se o BigFloat passado for inválido.
+*/
+bool bf_verificar_bigfloat_valido(const BigFloat *bf);
+
 #endif

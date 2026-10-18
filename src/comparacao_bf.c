@@ -1,12 +1,5 @@
 #include "comparacao_bf.h"
 
-static bool bf_valido(const BigFloat *bf) {
-    if (bf == NULL) return false;
-    if (bf->tamanho > bf->capacidade) return false;
-    if (bf->tamanho > 0 && bf->mantissa == NULL) return false;
-    return true;
-}
-
 static int posicao_digito_bf(const BigFloat *bf, long pos) {
     long k = pos + bf->expoente;
     if (k < 0 || (size_t)k >= bf->tamanho * 9) {
@@ -23,7 +16,7 @@ static int posicao_digito_bf(const BigFloat *bf, long pos) {
 }
 
 int comparar_bf(const BigFloat *bf1, const BigFloat *bf2) {
-    if (!bf_valido(bf1) || !bf_valido(bf2)) return BF_CMP_ERRO;
+    if (!bf_verificar_bigfloat_valido(bf1) || !bf_verificar_bigfloat_valido(bf2)) return BF_CMP_ERRO;
 
     bool bf1_neg = bf_e_negativo(bf1);
     bool bf2_neg = bf_e_negativo(bf2);
@@ -36,7 +29,7 @@ int comparar_bf(const BigFloat *bf1, const BigFloat *bf2) {
 }
 
 int comparar_modulo_bf(const BigFloat *bf1, const BigFloat *bf2) {
-    if (!bf_valido(bf1) || !bf_valido(bf2)) return BF_CMP_ERRO;
+    if (!bf_verificar_bigfloat_valido(bf1) || !bf_verificar_bigfloat_valido(bf2)) return BF_CMP_ERRO;
 
     bool bf1_zero = bf_e_zero(bf1);
     bool bf2_zero = bf_e_zero(bf2);
@@ -58,7 +51,7 @@ int comparar_modulo_bf(const BigFloat *bf1, const BigFloat *bf2) {
 }
 
 bool bf_e_zero(const BigFloat *bf) {
-    if (!bf_valido(bf)) return false;
+    if (!bf_verificar_bigfloat_valido(bf)) return false;
 
     for (size_t i = bf->tamanho; i > 0; i--) {
         if (bf->mantissa[i - 1] != 0) return false;
@@ -67,10 +60,18 @@ bool bf_e_zero(const BigFloat *bf) {
 }
 
 bool bf_e_negativo(const BigFloat *bf) {
-    if (!bf_valido(bf)) return false;
+    if (!bf_verificar_bigfloat_valido(bf)) return false;
     
     if (bf->sinal == -1 && !bf_e_zero(bf)) {
         return true;
     }
     return false;
+}
+
+bool bf_verificar_bigfloat_valido(const BigFloat *bf) {
+    return (
+        (bf != NULL) &&
+        (bf->tamanho <= bf->capacidade) &&
+        (bf->tamanho == 0 || bf->mantissa != NULL)
+    );
 }
