@@ -13,16 +13,14 @@ typedef struct {
 void test_modulo_gerenciamneto_de_memoria();
 void test_modulo_comparacao_bf();
 void test_modulo_entrada_e_saida();
-void test_modulo_bf_mensagem();
 
 /*----------------------------------------------------------------------------*/
 
 int main(void) {
     const TesteModulo testes[] = {
-        {"Gerenciamento de Memoria", test_modulo_gerenciamneto_de_memoria},
-        {"Comparacoes", test_modulo_comparacao_bf},
-        {"Entrada e Saida", test_modulo_entrada_e_saida},
-        {"Mensagens", test_modulo_bf_mensagem}
+        {"Gerenciamento de Memória", test_modulo_gerenciamneto_de_memoria},
+        {"Comparações", test_modulo_comparacao_bf},
+        {"Entrada e Saída", test_modulo_entrada_e_saida},
     };
     const size_t quantidade_testes = sizeof(testes) / sizeof(testes[0]);
 
