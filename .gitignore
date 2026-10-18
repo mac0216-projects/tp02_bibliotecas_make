@@ -1,6 +1,9 @@
 build/
 logs/
 .vscode/
+bin/
+libs/
+obj/
 
 *log
 *.a
