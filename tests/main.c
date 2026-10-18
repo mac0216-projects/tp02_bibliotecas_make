@@ -13,6 +13,7 @@ typedef struct {
 void test_modulo_gerenciamneto_de_memoria();
 void test_modulo_comparacao_bf();
 void test_modulo_entrada_e_saida();
+void test_modulo_bf_aritmetico();
 
 /*----------------------------------------------------------------------------*/
 
@@ -21,6 +22,7 @@ int main(void) {
         {"Gerenciamento de Memória", test_modulo_gerenciamneto_de_memoria},
         {"Comparações", test_modulo_comparacao_bf},
         {"Entrada e Saída", test_modulo_entrada_e_saida},
+        {"Aritmético", test_modulo_bf_aritmetico}
     };
     const size_t quantidade_testes = sizeof(testes) / sizeof(testes[0]);
 
@@ -28,7 +30,7 @@ int main(void) {
     for (size_t i = 0; i < quantidade_testes; i++) {
         printf("[%zu/%zu] Testando %s ", (i + 1), quantidade_testes, testes[i].texto);
         testes[i].funcao();
-        printf("\033[32m%30s OK!\033[m\n", testes[i].texto);
+        printf("\033[32m%40s OK!\033[m\n", testes[i].texto);
     }
 
     return 0;

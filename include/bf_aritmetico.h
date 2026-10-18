@@ -1,7 +1,10 @@
 #ifndef BF_ARITMETICO_H
 
     #include "gerenciamento_de_memoria_bf.h"
+
     #define BF_ARITMETICO_H
+    #define BF_BASE 1000000000U
+    #define BF_DIGITOS_POR_LIMB 9
 
     /*!
         @brief Função que realiza a soma de dois números de precisão arbitrária.

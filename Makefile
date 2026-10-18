@@ -15,7 +15,7 @@ TEST_TARGET = $(BIN_DIR)/test_runner
 STATIC_LIB = $(LIB_DIR)/libbf.a
 DYNAMIC_LIB = $(LIB_DIR)/libbf.so
 
-LIB_SRCS = src/gerenciamento_de_memoria_bf.c src/entrada_e_saida.c src/comparacao_bf.c src/bf_mensagem.c
+LIB_SRCS = src/gerenciamento_de_memoria_bf.c src/entrada_e_saida.c src/comparacao_bf.c src/bf_aritmetico.c
 APP_SRC = app/main.c
 TEST_SRCS = tests/*.c
 
