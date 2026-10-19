@@ -1,0 +1,13 @@
+build/
+logs/
+.vscode/
+bin/
+libs/
+obj/
+
+*log
+*.a
+*.o
+calculadora_bf
+test_runner
+output
