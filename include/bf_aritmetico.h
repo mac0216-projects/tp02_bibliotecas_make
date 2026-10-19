@@ -46,10 +46,12 @@
         @brief Função que realiza a divisão de dois números de precisão arbitrária.
         @param bigFloatUm Ponteiro para o primeiro número de precisão arbitrária.
         @param bigFloatDois Ponteiro para o segundo número de precisão arbitrária.
+        @param casasDecimais Quantidade de casas decimais desejadas no resultado da divisão.
         @pre Nenhum dos ponteiros bigFloatUm ou bigFloatDois deve ser nulo. O segundo número não deve ser zero.
         @post Um ponteiro não nulo para um novo BigFloat é retornado, representando a divisão do primeiro número pelo segundo.
         @return Ponteiro para um novo BigFloat que representa a divisão do primeiro número pelo segundo.
+            Em caso de divisão por 0, a função retorna NULL.
     */
-    BigFloat *bf_dividir(const BigFloat *bigFloatUm, const BigFloat *bigFloatDois);
+    BigFloat *bf_dividir(const BigFloat *bigFloatUm, const BigFloat *bigFloatDois, size_t casasDecimais);
 
-#endif 
+#endif

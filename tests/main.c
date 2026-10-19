@@ -30,7 +30,7 @@ int main(void) {
     for (size_t i = 0; i < quantidade_testes; i++) {
         printf("[%zu/%zu] Testando %s ", (i + 1), quantidade_testes, testes[i].texto);
         testes[i].funcao();
-        printf("\033[32m%40s OK!\033[m\n", testes[i].texto);
+        printf("\033[32m%30s OK!\033[m\n", testes[i].texto);
     }
 
     return 0;

@@ -27,11 +27,20 @@ static void conferir_operacao(const char *entrada_um, const char *entrada_dois, 
         case BF_SOMA:
             resultado = bf_somar(&primeiro, &segundo);
             break;
+
         case BF_SUBTRACAO:
             resultado = bf_subtrair(&primeiro, &segundo);
             break;
-        default:
-            assert(false && "Operação aritmética não suportada neste teste.");
+
+        case BF_MULTIPLICACAO:
+            resultado = bf_multiplicar(&primeiro, &segundo);
+            break;
+
+        case BF_DIVISAO:
+            resultado = bf_dividir(&primeiro, &segundo, 18);
+            break;
+
+        default:assert(false && "Operação aritmética não suportada neste teste.");
     }
     assert(resultado != NULL);
 
@@ -69,6 +78,20 @@ static void test_subtrair(void) {
     conferir_operacao("5.125", "5.125", "0", true);
 }
 
+static void test_multiplicar(void) {
+    conferir_operacao("12", "3", "36", BF_MULTIPLICACAO);
+    conferir_operacao("-2.5", "4", "-10.0", BF_MULTIPLICACAO);
+    conferir_operacao("1.25", "0.8", "1.000", BF_MULTIPLICACAO);
+    conferir_operacao("1000000000", "1000000000", "1000000000000000000",
+                      BF_MULTIPLICACAO);
+}
+
+static void test_dividir(void) {
+    conferir_operacao("10", "4", "2.500000000000000000", BF_DIVISAO);
+    conferir_operacao("1", "3", "0.333333333333333333", BF_DIVISAO);
+    conferir_operacao("-1", "2", "-0.500000000000000000", BF_DIVISAO);
+}
+
 static void test_ponteiros_nulos_aritmetico(void) {
     BigFloat numero;
     assert(inicializar_bf(&numero));
@@ -78,12 +101,33 @@ static void test_ponteiros_nulos_aritmetico(void) {
     assert(bf_somar(&numero, NULL) == NULL);
     assert(bf_subtrair(NULL, &numero) == NULL);
     assert(bf_subtrair(&numero, NULL) == NULL);
+    assert(bf_multiplicar(NULL, &numero) == NULL);
+    assert(bf_multiplicar(&numero, NULL) == NULL);
+    assert(bf_dividir(NULL, &numero, 18) == NULL);
+    assert(bf_dividir(&numero, NULL, 18) == NULL);
 
     liberar_bf(&numero);
+}
+
+static void test_divisao_por_zero(void) {
+    BigFloat numero;
+    BigFloat zero;
+    assert(inicializar_bf(&numero));
+    assert(inicializar_bf(&zero));
+    assert(string_para_bf(&numero, "10"));
+    assert(string_para_bf(&zero, "0"));
+
+    assert(bf_dividir(&numero, &zero, 18) == NULL);
+
+    liberar_bf(&numero);
+    liberar_bf(&zero);
 }
 
 void test_modulo_bf_aritmetico(void) {
     test_somar();
     test_subtrair();
+    test_multiplicar();
+    test_dividir();
     test_ponteiros_nulos_aritmetico();
+    test_divisao_por_zero();
 }
