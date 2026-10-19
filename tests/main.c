@@ -1,30 +1,37 @@
 #include <stdio.h>
 
-// --- PROTÓTIPOS: A lista de todos os testes do projeto ---
+/*----------------------------------------------------------------------------*/
 
-// Módulo 1: Memória
+typedef void (*FuncaoTeste)(void);
+typedef struct {
+    const char *texto;
+    FuncaoTeste funcao;
+} TesteModulo;
+
+/*----------------------------------------------------------------------------*/
+
 void test_modulo_gerenciamneto_de_memoria();
-
-// Módulo 4: Entrada e Saída
+void test_modulo_comparacao_bf();
 void test_modulo_entrada_e_saida();
+void test_modulo_bf_aritmetico();
 
+/*----------------------------------------------------------------------------*/
 
-int main() {
-  printf("=======================================\n");
-  printf(" INICIANDO BATERIA DE TESTES BIGFLOAT\n");
-  printf("=======================================\n\n");
+int main(void) {
+    const TesteModulo testes[] = {
+        {"Gerenciamento de Memória", test_modulo_gerenciamneto_de_memoria},
+        {"Comparações", test_modulo_comparacao_bf},
+        {"Entrada e Saída", test_modulo_entrada_e_saida},
+        {"Aritmético", test_modulo_bf_aritmetico}
+    };
+    const size_t quantidade_testes = sizeof(testes) / sizeof(testes[0]);
 
-  printf("[1/2] Testando Gerenciamento de Memoria...\n");
-  test_modulo_gerenciamneto_de_memoria();
-  printf("      -> Memoria OK!\n\n");
+    puts("");
+    for (size_t i = 0; i < quantidade_testes; i++) {
+        printf("[%zu/%zu] Testando %s ", (i + 1), quantidade_testes, testes[i].texto);
+        testes[i].funcao();
+        printf("\033[32m%30s OK!\033[m\n", testes[i].texto);
+    }
 
-  printf("[2/2] Testando Entrada e Saida...\n");
-  test_modulo_entrada_e_saida();
-  printf("      -> Entrada e Saida OK!\n\n");
-
-  printf("=======================================\n");
-  printf(" TODOS OS TESTES PASSARAM COM SUCESSO! \n");
-  printf("=======================================\n");
-
-  return 0;
+    return 0;
 }
